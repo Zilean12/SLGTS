@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IoT-Based Smart Street Lighting System</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Additional Styles for Professional Look -->
+    <style>
+   body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .navbar-toggle {
+            border-color: #ffffff;
+        }
+
+        .navbar-toggle .icon-bar {
+            background-color: #ffffff;
+        }
+
+        .navbar-nav > li > a {
+            color: #ffffff;
+        }
+
+        .section-header {
+            margin-top: 60px;
+            color: #343a40;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .section-content {
+            margin-top: 20px;
+            color: #6c757d;
+        }
+
+        .user-info {
+            color: #495057;
+        }
+
+        .btn-round {
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        .button-container {
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            bottom: 0%;
+            position: fixed;
+            width: 100%;
+        }
+
+        /* Animation for Introduction Section */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar (Header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Navbar Toggle Button -->
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Navbar Brand -->
+            <a class="navbar-brand" href="#" th:href="@{/}">Smart Lighting System</a>
+        </div>
+        <!-- Navbar Links -->
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/Contact}" id="aboutButton">About Us</a>
+                </li>
+                <li>
+                    <a class="Car-link" href="/Car">Car</a>
+                </li>
+                <li>
+                    <a class="emergency-link" href="/emergency">Emergency</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Introduction Section -->
+    <section class="text-center section-header">
+        <h2>Welcome to the Future of Illumination</h2>
+        <p class="section-content">Experience the innovation of smart technology transforming urban lighting solutions.</p>
+        <p class="section-content">
+            Experience the innovation of the IoT-Based Smart Street Lighting System, a revolutionary solution
+            transforming urban lighting into a more efficient and intelligent infrastructure.
+        </p>
+    </section>
+
+    <!-- User Information Section (Assuming this is for displaying user information) -->
+    <div class="text-center user-info">
+        <p>Hello, <span sec:authentication="principal.username">User</span>!</p>
+    </div>
+
+    <!-- Your 12 Round Buttons with Reduced Spacing -->
+    <div class="button-container text-center mt-3">
+        <!-- Buttons 1-2 -->
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day1Modal">Day 1</button>
+            </div>
+            <!-- Add the Day 2 button here -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day2Modal">Day 2</button>
+            </div>
+            <!-- Add the Day 3 button here -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day3Modal">Day 3</button>
+            </div>
+            <!-- Add the Day 4 button here -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day4Modal">Day 4</button>
+            </div>
+            <!-- Add the Day 5 button here -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day5Modal" id="day5Button">Day 5</button>
+            </div>
+            <!-- Add the Day 6 button here -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day6Modal" id="day6Button">Day 6</button>
+            </div>
+            <!-- Add the Day 7 button here -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#day7Modal" id="day7Button">Day 7</button>
+            </div>
+    	</div>
+    </div>
+</div>
+<!-- Additional Context Section -->
+    <div class="container">
+        <div class="section-header">
+            <h3>Smart Street Lighting System Overview</h3>
+        </div>
+        <div class="section-content">
+            <p>
+                Our Smart Street Lighting System integrates cutting-edge technology to enhance urban lighting efficiency, reduce energy consumption, and provide intelligent solutions for modern cities. With real-time monitoring, adaptive brightness control, and seamless integration with emergency services, our system ensures a safer, energy-efficient, and technologically advanced urban environment.
+            </p>
+            <p>
+                Key Features:
+                <ul>
+                    <li><strong>Real-time Monitoring:</strong> Gain unprecedented control with live updates on street lighting status, energy consumption, and performance metrics.</li>
+                    <li><strong>Adaptive Brightness Control:</strong> Our intelligent system adjusts brightness dynamically based on environmental conditions, optimizing energy efficiency without compromising safety.</li>
+                    <li><strong>Emergency Integration:</strong> Seamlessly coordinate with emergency services to enhance public safety during critical situations.</li>
+                    <li><strong>Advanced Analytics:</strong> Harness the power of data with comprehensive analytics providing insights into traffic patterns, pedestrian density, and energy consumption. Make informed decisions to improve urban planning.</li>
+                    <li><strong>Remote Management:</strong> Control and configure lighting settings remotely, ensuring efficient operation and minimizing maintenance efforts.</li>
+                    <li><strong>Sustainable Practices:</strong> Contribute to a greener environment with energy-efficient LED lighting and smart management practices, reducing the carbon footprint of urban lighting.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+<!-- Script to handle Emergency button click -->
+<script>
+    // Function to redirect to the emergency page
+    function redirectToEmergencyPage() {
+        window.location.href = "/Contact"; // Change the URL to match your emergency page URL
+    }
+
+// Add an event listener to the Emergency button
+    document.getElementById("aboutButton").addEventListener("click", redirectToEmergencyPage);
+</script>
+
+<!-- Bootstrap JS (Make sure to include jQuery and Bootstrap JS libraries as needed) -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<!-- Footer -->
+<footer class="footer text-center" style="bottom: 0%; position: fixed; width: 100%;">
+    <p>&copy; 2023 IoT-Based Smart Street Lighting System</p>
+</footer>
+
+<!-- Day 1 Modal -->
+<div class="modal fade" id="day1Modal" tabindex="-1" role="dialog" aria-labelledby="day1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="day1ModalLabel">Day 1 Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Date: 15-Nov-2021</p>
+                <p>Start Time: 12:30 pm</p>
+                <p>End Time: 12:50 pm</p>
+                <p>Location: Neemrana</p>
+                <p>Light Status: On</p>
+                <p>Pole Id: 10</p>
+                <p>Traffic Density: Low</p>
+
+                <!-- Emergency Information within Day 1 Modal -->
+                <hr>
+                <p>Emergency Id: 01</p>
+                <p>Emergency Type: NA</p>
+                <p>Emergency Status: Inactive</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Day 2 Modal -->
+<div class="modal fade" id="day2Modal" tabindex="-2" role="dialog" aria-labelledby="day2ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="day2ModalLabel">Day 2 Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Date: 16-Nov-2021</p>
+                <p>Start Time: 1:30 pm</p>
+                <p>End Time: 3:50 pm</p>
+                <p>Location: Neemrana</p>
+                <p>Light Status: OFF</p>
+                <p>Pole Id: 10</p>
+                <p>Traffic Density: Low</p>
+
+                <!-- Emergency Information within Day 2 Modal -->
+                <hr>
+                <p>Emergency Id: 02</p>
+                <p>Emergency Type: NA</p>
+                <p>Emergency Status: Inactive</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Day 3 Modal -->
+<div class="modal fade" id="day3Modal" tabindex="-3" role="dialog" aria-labelledby="day3ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="day2ModalLabel">Day 3 Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Date: 17-Nov-2021</p>
+                <p>Start Time: 8:30 pm</p>
+                <p>End Time: 10:50 pm</p>
+                <p>Location: Neemrana</p>
+                <p>Light Status: ON</p>
+                <p>Pole Id: 10</p>
+                <p>Traffic Density: Medium</p>
+
+                <!-- Emergency Information within Day 3 Modal -->
+                <hr>
+                <p>Emergency Id: 03</p>
+                <p>Emergency Type: NA</p>
+                <p>Emergency Status: Inactive</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Day 4 Modal -->
+<div class="modal fade" id="day4Modal" tabindex="-4" role="dialog" aria-labelledby="day4ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="day2ModalLabel">Day 4 Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Date: 18-Nov-2021</p>
+                <p>Start Time: 10:30 pm</p>
+                <p>End Time: 11:50 pm</p>
+                <p>Location: Neemrana</p>
+                <p>Light Status: ON</p>
+                <p>Pole Id: 10</p>
+                <p>Traffic Density: Medium</p>
+
+                <!-- Emergency Information within Day 4 Modal -->
+                <hr>
+                <p>Emergency Id: 04</p>
+                <p>Emergency Type: Car Accident</p>
+                <p>Emergency Status: Active</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script to display "No Data found" pop-up -->
+<script>
+    // Function to display the "No Data found" pop-up
+    function showNoDataPopup() {
+        alert("No Data found");
+    }
+
+    // Add event listeners to the Day 5, 6, and 7 buttons
+    document.getElementById("day5Button").addEventListener("click", showNoDataPopup);
+    document.getElementById("day6Button").addEventListener("click", showNoDataPopup);
+    document.getElementById("day7Button").addEventListener("click", showNoDataPopup);
+</script>
+
+
+</body>
+</html>

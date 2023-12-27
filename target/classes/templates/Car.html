@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detail</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        header a:hover {
+            background-color: #555;
+        }
+
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        tr:hover {
+            transform: scale(1.05);
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #result.error {
+            color: #ff3333;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        #result.error {
+            color: #ff3333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a class="home-link" href="/">Home</a>
+        <a class="Contact-link" href="/Contact">About Us</a>
+        <a class="emergency-link" href="/emergency">Emergency</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </header>
+    <main>
+        <h2>Car Number and Pole Number</h2>
+
+        <p>Enter the car number to search:</p>
+        <input type="text" id="carNumberInput">
+        <button onclick="searchCarNumber()">Search</button>
+
+        <p id="result"></p>
+    </main>
+
+    <script>
+        // Create a 5x5 matrix
+        const matrix = [
+            [{ carNumber: 'MH05EN3311', poleNumber: 1 }, { carNumber: 'HR12VR2482', poleNumber: 2 }, { carNumber: 'UP16BR7272', poleNumber: 3 }, { carNumber: 'DL14CD4007', poleNumber: 4 }, { carNumber: 'RJ14CV0002', poleNumber: 5 }],
+            [{ carNumber: 'MH12DE1433', poleNumber: 6 }, { carNumber: 'HR26DQ5551', poleNumber: 7 }, { carNumber: 'UP14AC1417', poleNumber: 8 }, { carNumber: 'DL14CE1946', poleNumber: 9 }, { carNumber: 'RJ14JF0786', poleNumber: 10 }],
+            [{ carNumber: 'MH05EN3312', poleNumber: 11 }, { carNumber: 'HR213Q1942', poleNumber: 12 }, { carNumber: 'UP14BN4001', poleNumber: 13 }, { carNumber: 'DL4CAF4943', poleNumber: 14 }, { carNumber: 'RJ14GD4249', poleNumber: 15 }],
+            [{ carNumber: 'MH43CC1745', poleNumber: 16 }, { carNumber: 'HR43CC1745', poleNumber: 17 }, { carNumber: 'UP43CC1745', poleNumber: 18 }, { carNumber: 'DL7CP5761', poleNumber: 19 }, { carNumber: 'RJ14CB0012', poleNumber: 20 }],
+            [{ carNumber: 'MH4ACD1998', poleNumber: 21 }, { carNumber: 'HR08CA8188', poleNumber: 22 }, { carNumber: 'UP08CA8188', poleNumber: 23 }, { carNumber: 'DL05AE7782', poleNumber: 24 }, { carNumber: 'RJ02E5500', poleNumber: 25 }],
+        ];
+
+        // Function to search for a car number in the matrix
+        function searchCarNumber() {
+            const carNumberInput = document.getElementById('carNumberInput').value.toUpperCase();
+
+            let carFound = false;
+
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    const currentCarNumber = matrix[i][j].carNumber.toUpperCase();
+                    if (currentCarNumber === carNumberInput) {
+                        carFound = true;
+                        displayResult(matrix[i][j]);
+                        break;
+                    }
+                }
+
+                if (carFound) {
+                    break;
+                }
+            }
+
+            if (!carFound) {
+                displayError();
+            }
+        }
+
+        // Function to display the result when the car number is found
+        function displayResult(cell) {
+            const resultElement = document.getElementById('result');
+
+            let resultHTML = `<strong>Car Number:</strong> ${cell.carNumber}<br>`;
+            resultHTML += `<strong>Current Pole Number:</strong> ${cell.poleNumber}<br>`;
+
+            if (cell.poleNumber > 1) {
+                resultHTML += `<strong>Previous Pole Numbers:</strong> ${cell.poleNumber - 1}, ${cell.poleNumber - 2}<br>`;
+            }
+
+            resultHTML += `<strong>Next Pole Numbers:</strong> ${cell.poleNumber + 1}, ${cell.poleNumber + 2}, ${cell.poleNumber + 3}`;
+
+            resultElement.innerHTML = resultHTML;
+        }
+
+        // Function to display an error when the car number is not found
+        function displayError() {
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = '<p id="result" class="error">Error: Car number not found.</p>';
+        }
+    </script>
+    <div class="contact-info">
+        <p>&copy; 2023 IoT-Based Smart Street Lighting System</p>
+    </div>
+</body>
+
+</html>

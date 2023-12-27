@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external stylesheet -->
+
+ <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light background color */
+            color: #495057; /* Text color */
+            line-height: 1.6;
+        }
+
+        header, footer {
+            background-color: #343a40; /* Dark background color for header and footer */
+            color: #fff; /* Text color for header and footer */
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff; /* White background color for content area */
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            border-top: 1px solid #dee2e6;
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .home-link, .Car-link, .emergency-link, .logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-left: 20px; /* Adjust the spacing as needed */
+            opacity: 0.7;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .home-link:hover, .Car-link:hover, .emergency-link:hover, .logout-link:hover {
+            opacity: 1;
+        }
+
+        .home-link {
+            margin-left: auto; /* Push the home link to the right */
+        }
+
+        .user-details-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 20px; /* Adjust the spacing as needed */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>About Us</h1>
+        
+        <a class="home-link" href="/">Home</a>
+        <a class="Car-link" href="/Car">Car</a>
+        <a class="emergency-link" href="/emergency">Emergency</a>
+        <a class="logout-link" href="/logout">Logout</a>
+
+    </header>
+
+    <div class="container">
+        <section>
+            <p><strong>Name:</strong> Aryan Sharma</p>
+            <p><strong>Email:</strong> <a href="mailto:aryan.sharma21@st.niituniversity.in">aryan.sharma21@st.niituniversity.in</a></p>
+            <p><strong>Phone:</strong> +91 - 9960765259</p>
+        </section>
+
+        <div class="contact-info">
+            <p>&copy; 2023 IoT-Based Smart Street Lighting System</p>
+        </div>
+    </div>
+
+</body>
+</html>

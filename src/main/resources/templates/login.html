@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Street Light - User Login</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            padding-top: 70px; /* Adjust the top padding to avoid overlap with the fixed navbar */
+        }
+
+        .login-container {
+            margin-top: 50px;
+        }
+
+        .login-header {
+            text-align: center;
+        }
+
+        .login-form {
+            margin-top: 20px;
+        }
+
+        .login-form label {
+            font-weight: bold;
+        }
+
+        .login-form input {
+            margin-bottom: 10px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}">Smart Street Light</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Login Container -->
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="login-header">
+                <h1>User Login</h1>
+            </div>
+
+            <form th:action="@{/login}" method="post" th:object="${user}" class="login-form">
+				
+				
+                <!-- Error Message -->
+                <div th:if="${param.error}" class="alert alert-danger">
+                    Invalid username or password.
+                </div>
+
+      
+
+                <!-- Logout Message -->
+                <div th:if="${param.logout}" class="alert alert-info">
+                    You have been logged out.
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                           placeholder="Enter Email ID" autofocus="autofocus">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" class="form-control"
+                               placeholder="Enter Password"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="togglePassword">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="login-submit" id="login-submit"
+                                   class="form-control btn btn-primary" value="Log In"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="form-group register-link">
+                <span>New user? <a href="/" th:href="@{/registration}">Register here</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#togglePassword").click(function () {
+            var passwordField = $("#password");
+            var passwordFieldType = passwordField.attr("type");
+
+            if (passwordFieldType === "password") {
+                passwordField.attr("type", "text");
+            } else {
+                passwordField.attr("type", "password");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

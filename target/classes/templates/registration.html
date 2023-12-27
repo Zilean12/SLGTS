@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+	  
+    body {
+      padding-top: 70px; /* Adjusted padding for fixed navbar */
+    }
+    h1 {
+      text-align: center;
+    }
+    .form-container {
+      margin-top: 30px;
+    }
+    .success-message {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar (Header) -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" th:href="@{/}">Registration and Login Module</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container form-container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        <!-- Success Message -->
+        <div th:if="${param.success}" class="alert alert-success success-message">
+          You've successfully registered to our awesome app!
+        </div>
+
+        <h1>Registration</h1>
+ 		<!-- Display error message if exists -->
+            <div th:if="${error}" class="alert alert-danger">
+                <p th:text="${error}"></p>
+            </div>
+            
+        <!-- Registration Form -->
+        <form th:action="@{/registration}" method="post" th:object="${user}" onsubmit="return validateForm()">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" class="form-control" th:field="*{firstName}" required autofocus="autofocus">
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" class="form-control" th:field="*{lastName}" required autofocus="autofocus">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" class="form-control" th:field="*{email}" required autofocus="autofocus">
+            <span id="emailError" class="text-danger"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input id="password" class="form-control" type="password" th:field="*{password}" required autofocus="autofocus">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="togglePasswordVisibility()">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                </button>
+              </div>
+            </div>
+            <span id="passwordError" class="text-danger"></span>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Register</button>
+            <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        
+  <script>
+	  function checkEmailExistence() {
+        clearErrorMessages();
+
+        var emailInput = document.getElementById("email");
+        var emailValue = emailInput.value;
+
+        // Make an AJAX request to check if the email already exists
+        $.ajax({
+            url: "/check-email-existence?email=" + emailValue,
+            type: "GET",
+            success: function (response) {
+                if (response.exists) {
+                    document.getElementById("emailError").innerText = "This email is already in use by another user.";
+                }
+            },
+            error: function () {
+                console.error("Error checking email existence");
+            }
+        });
+    }
+    function validateForm() {
+      clearErrorMessages();
+
+      var isValid = true;
+
+      if (!validateEmail()) {
+        isValid = false;
+      }
+
+      if (!validatePassword()) {
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    function validateEmail() {
+      var emailInput = document.getElementById("email");
+      var emailValue = emailInput.value;
+
+      // Check if the email ends with "@gmail.com"
+      if (!emailValue.toLowerCase().endsWith("@gmail.com")) {
+        document.getElementById("emailError").innerText = "Please enter a valid Gmail address.";
+        return false;
+      }
+
+      // Check if the email already exists
+      checkEmailExistence();
+
+      return true;
+    }
+
+    function validatePassword() {
+      var passwordInput = document.getElementById("password");
+      var passwordValue = passwordInput.value;
+
+      // Check if the password meets the criteria
+      var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).{6,}$/;
+      if (!passwordRegex.test(passwordValue)) {
+        document.getElementById("passwordError").innerText = "Please enter a valid password. It must be at least 6 characters long and contain at least 1 number, 1 lowercase alphabet, 1 uppercase alphabet, and 1 special character (@, #, $, %, &).";
+        return false;
+      }
+
+      return true;
+    }
+
+    function clearErrorMessages() {
+      document.getElementById("emailError").innerText = "";
+      document.getElementById("passwordError").innerText = "";
+    }
+
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById("password");
+
+      // Toggle the type attribute
+      passwordInput.type = (passwordInput.type === "password") ? "text" : "password";
+    }
+
+  </script>
+</body>
+</html>

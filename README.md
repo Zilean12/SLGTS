@@ -1,36 +1,22 @@
 # Smart Lighting Green Technology Solution
 
-[![Build Status](https://travis-ci.org/[Your GitHub Username]/Smart-Lighting-Green-Technology-Solution.svg?branch=master)](https://travis-ci.org/[Your GitHub Username]/Smart-Lighting-Green-Technology-Solution)
-![License](https://img.shields.io/badge/license-NIIT%20University-blue.svg)
+This project involves using Internet of Things (IoT) technology to create an energy-efficient lighting system. The solution integrates smart devices and sensors to optimize lighting based on environmental conditions and user preferences. It aims to reduce energy consumption, promote sustainability, and enhance user experience.
 
-## Overview
+## Control Panel
 
-Smart Lighting Green Technology Solution involves using Internet of Things (IoT) technology to create an energy-efficient lighting system. This solution integrates smart devices and sensors to optimize lighting based on environmental conditions and user preferences. It aims to reduce energy consumption, promote sustainability, and enhance user experience.
+### User Preferences Form
 
-## Table of Contents
+Adjust the brightness and color temperature using the sliders in the control panel. Click the "Save Preferences" button to store your settings.
 
-- [Screenshots](#screenshots)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](CONTRIBUTING.md)
-- [License](#license)
+```html
+<form id="userPreferencesForm">
+    <label for="brightness">Set Brightness:</label>
+    <input type="range" id="brightness" name="brightness" min="0" max="100" value="50">
+    <span id="brightnessValue">50</span>
 
-## Screenshots
+    <label for="colorTemperature">Set Color Temperature:</label>
+    <input type="range" id="colorTemperature" name="colorTemperature" min="2000" max="7000" value="4000">
+    <span id="colorTemperatureValue">4000K</span>
 
-Include screenshots or GIFs to showcase your Smart Lighting Green Technology Solution.
-
-## Installation
-
-Provide clear instructions on how to install and set up your Smart Lighting Green Technology Solution.
-
-## Usage
-
-Show examples of how to use your Smart Lighting Green Technology Solution and any specific configurations needed.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributing to the project.
-
-## License
-
-This project is licensed under the [NIIT University Software Engineering License](LICENSE).
+    <button type="button" onclick="saveUserPreferences()">Save Preferences</button>
+</form>

@@ -1,15 +1,5 @@
 # Smart Lighting Green Technology Solution
 
-This project involves using Internet of Things (IoT) technology to create an energy-efficient lighting system. The solution integrates smart devices and sensors to optimize lighting based on environmental conditions and user preferences. It aims to reduce energy consumption, promote sustainability, and enhance user experience.
-
-## Control Panel
-
-### User Preferences Form
-
-Adjust the brightness and color temperature using the sliders in the control panel. Click the "Save Preferences" button to store your settings.
-
-# Smart Lighting Green Technology Solution
-
 Smart Lighting Green Technology Solution involves using Internet of Things (IoT) technology to create an energy-efficient lighting system. This solution integrates smart devices and sensors to optimize lighting based on environmental conditions and user preferences. It aims to reduce energy consumption, promote sustainability, and enhance user experience.
 
 ## Key Features:
